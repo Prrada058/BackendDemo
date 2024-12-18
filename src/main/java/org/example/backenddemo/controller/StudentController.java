@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class UserController {
+public class StudentController {
     @Autowired
     private StudentMapper studentMapper;
 
-    @GetMapping("/user")
-    public String query() {
-        List<Student> list = studentMapper.find();
+    @GetMapping("/student")
+    public List query() {
+        List<Student> list = studentMapper.selectList(null);
         System.out.println(list);
-        return "user";
+        return list;
     }
 }
