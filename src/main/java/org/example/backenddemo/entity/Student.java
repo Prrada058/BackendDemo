@@ -1,6 +1,10 @@
 package org.example.backenddemo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class Student {
+    @TableId(type = IdType.INPUT)
     private int stuCode;
     private String stuFname;
     private String stuLname;
