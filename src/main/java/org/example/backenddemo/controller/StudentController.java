@@ -1,7 +1,9 @@
 package org.example.backenddemo.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.example.backenddemo.entity.Enrolment;
 import org.example.backenddemo.entity.Student;
+import org.example.backenddemo.mapper.EnrolmentMapper;
 import org.example.backenddemo.mapper.StudentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +34,6 @@ public class StudentController {
             return "插入失败";
         }
     }
-
 
     //根据pk 删除
     @PostMapping("/studentD1")
@@ -67,5 +68,11 @@ public class StudentController {
             return "更新失败";
         }
     }
+
+    @GetMapping("/student/findAll")
+    public List<Student> findAll() {
+        return studentMapper.selectAllsStudentEnrollment();
+    }
+
 
 }

@@ -1,15 +1,19 @@
 package org.example.backenddemo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+
+import java.util.List;
 
 public class Student {
     @TableId(type = IdType.INPUT)
     private int stuCode;
     private String stuFname;
     private String stuLname;
-    private String stuGender;
-    private String stuDob;
+
+    @TableField(exist = false)
+    private List<Enrolment> enrolments;
 
     @Override
     public String toString() {
@@ -17,8 +21,7 @@ public class Student {
                 "stuCode=" + stuCode +
                 ", stuFname='" + stuFname + '\'' +
                 ", stuLname='" + stuLname + '\'' +
-                ", stuGender='" + stuGender + '\'' +
-                ", stuDob='" + stuDob + '\'' +
+                ", enrolments=" + enrolments +
                 '}';
     }
 
@@ -46,19 +49,11 @@ public class Student {
         this.stuLname = stuLname;
     }
 
-    public String getStuGender() {
-        return stuGender;
+    public List<Enrolment> getEnrolments() {
+        return enrolments;
     }
 
-    public void setStuGender(String stuGender) {
-        this.stuGender = stuGender;
-    }
-
-    public String getStuDob() {
-        return stuDob;
-    }
-
-    public void setStuDob(String stuDob) {
-        this.stuDob = stuDob;
+    public void setEnrolments(List<Enrolment> enrolments) {
+        this.enrolments = enrolments;
     }
 }
