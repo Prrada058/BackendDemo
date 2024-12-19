@@ -1,12 +1,16 @@
 package org.example.backenddemo.entity;
 
 public class User {
+
     private String name;
     private String password;
 
     @Override
     public String toString() {
-        return "User{name='" + name + "', password=" + password + "}";
+        return "User{" +
+                "name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
     public String getName() {
