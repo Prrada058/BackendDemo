@@ -23,6 +23,8 @@ public class AccountController {
         }
     }
 
+    // todo 登录api区分密码错误还是用户名不存在
+
     @PostMapping("login")
     public String login(@RequestParam("accName") String accName, @RequestParam("accPassword") String accPassword) {
         String password = accountMapper.getPasswordByUsername(accName);
@@ -34,4 +36,6 @@ public class AccountController {
             return "login failed";
         }
     }
+
+    // todo 增加修改密码
 }
