@@ -4,13 +4,12 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 
 public class Account {
-    @TableId(type = IdType.INPUT)
+    @TableId(type = IdType.AUTO)
     private int accId;
     private String accName;
     private String accPassword;
     private String accEmail;
 //todo 增加用户权限
-//todo 注册自动生成主键
     @Override
     public String toString() {
         return "Account{" +

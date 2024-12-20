@@ -19,6 +19,7 @@ public class AccountController {
 
     @PostMapping("/signup")
     public String createAccount(Account account) {
+
         try {
             int i = accountMapper.insert(account);
             if (i > 0) {
