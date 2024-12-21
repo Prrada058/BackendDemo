@@ -3,13 +3,16 @@ package org.example.backenddemo.controller;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.example.backenddemo.entity.Account;
 import org.example.backenddemo.mapper.AccountMapper;
+import org.example.backenddemo.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
 @RestController
 public class AccountController {
@@ -41,11 +44,10 @@ public class AccountController {
             return "系统错误: " + ex.getMessage();
         }
     }
-// todo 先查询查重还是直接 catch 异常
 
 
-    @PostMapping("/login")
-    public String login(@RequestParam("accName") String accName, @RequestParam("accPassword") String accPassword) {
+    @PostMapping("/signin")
+    public String login(@RequestParam String accName, @RequestParam String accPassword) {
         String password = accountMapper.getPasswordByUsername(accName);
 //        System.out.println("数据库中的" + password);
 //        System.out.println("输入的密码" + accPassword);
@@ -53,7 +55,8 @@ public class AccountController {
             return "错误的用户名";
         } else {
             if (password.equals(accPassword)) {
-                return "登录成功";
+                String token = JwtTokenProvider.generateToken(accName);
+                return "登录成功\n" + token;
             } else {
                 return "错误的密码";
             }
@@ -61,7 +64,7 @@ public class AccountController {
     }
 
 
-    @PostMapping("/changePassword")
+    @PostMapping("/account/changePassword")
     public String changePassword(@RequestParam String accName, @RequestParam String passwordBefore,@RequestParam String accPassword) {
         String password = accountMapper.getPasswordByUsername(accName);
         if (password == null) {
@@ -78,5 +81,11 @@ public class AccountController {
                 return "错误的密码";
             }
         }
+    }
+
+    @GetMapping("/account")
+    public List<Account> query() {
+        List<Account> accounts = accountMapper.selectList(null);
+        return accounts;
     }
 }
