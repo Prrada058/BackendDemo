@@ -9,7 +9,6 @@ public class Account {
     private String accName;
     private String accPassword;
     private String accEmail;
-//todo 增加用户权限
 
     @Override
     public String toString() {
