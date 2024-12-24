@@ -1,15 +1,14 @@
 package org.example.backenddemo.controller;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import org.example.backenddemo.dto.LoginRequest;
 import org.example.backenddemo.entity.Account;
 import org.example.backenddemo.mapper.AccountMapper;
 import org.example.backenddemo.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
@@ -47,25 +46,38 @@ public class AccountController {
 
 
     @PostMapping("/signin")
-    public String login(@RequestParam String accName, @RequestParam String accPassword) {
-        String password = accountMapper.getPasswordByUsername(accName);
-//        System.out.println("数据库中的" + password);
-//        System.out.println("输入的密码" + accPassword);
-        if (password == null) {
-            return "错误的用户名";
-        } else {
-            if (password.equals(accPassword)) {
-                String token = JwtTokenProvider.generateToken(accName);
-                return "登录成功\n" + token;
+    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+        // 从 JSON 中提取数据
+        String accName = request.getAccName();
+        String accPassword = request.getAccPassword();
+        String accToken = request.getAccToken();
+
+        if (accToken != null && !accToken.isEmpty()) {
+            if (JwtTokenProvider.validateToken(accToken)) {
+                    System.out.println("token登录成功");
+                    return ResponseEntity.ok("token登录成功");
             } else {
-                return "错误的密码";
+                return ResponseEntity.status(401).body("错误 token");
+            }
+        } else {
+            String password = accountMapper.getPasswordByUsername(accName);
+            if (password == null) {
+                return ResponseEntity.status(401).body("错误的用户名");
+            } else {
+                if (password.equals(accPassword)) {
+                    String token = JwtTokenProvider.generateToken(accName);
+                    System.out.println("登录成功返回 token");
+                    return ResponseEntity.ok (token);
+                } else {
+                    return ResponseEntity.status(401).body("错误的密码");
+                }
             }
         }
     }
 
 
     @PostMapping("/account/changePassword")
-    public String changePassword(@RequestParam String accName, @RequestParam String passwordBefore,@RequestParam String accPassword) {
+    public String changePassword(@RequestParam String accName, @RequestParam String passwordBefore, @RequestParam String accPassword) {
         String password = accountMapper.getPasswordByUsername(accName);
         if (password == null) {
             return "错误的用户名";
