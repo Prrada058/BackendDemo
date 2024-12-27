@@ -48,8 +48,14 @@ public class TimetableController {
             Duration duration = Duration.between(now, nextSubway);
             long minutes = duration.toMinutes() % 60;
             long seconds = duration.getSeconds() % 60;
-            System.out.println(timetables.get(i) + "|" + minutes + "分" + seconds + "秒");
-            list.add(timetables.get(i) + "|" + minutes + "分" + seconds + "秒");
+            if (minutes < 10){
+                System.out.println(timetables.get(i) + " |  " + minutes + "分" + seconds + "秒");
+                list.add(timetables.get(i) + " |  " + minutes + "分" + seconds + "秒");
+            }else {
+                System.out.println(timetables.get(i) + " | " + minutes + "分" + seconds + "秒");
+                list.add(timetables.get(i) + " | " + minutes + "分" + seconds + "秒");
+            }
+
 
         }
 
