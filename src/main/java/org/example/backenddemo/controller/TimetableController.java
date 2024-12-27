@@ -33,7 +33,7 @@ public class TimetableController {
 //        return now;
 //    }
 
-    @GetMapping("/timet")
+    @GetMapping("/timeBack")
     public List<String> getTimetables() {
         List<String> timetables = timetableMapper.selectTimetable();
         LocalTime now = LocalTime.now();
