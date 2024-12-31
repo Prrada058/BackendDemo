@@ -95,7 +95,7 @@ public class AccountController {
         }
     }
 
-    @GetMapping("/account")
+    @GetMapping("/account/list")
     public List<Account> query() {
         List<Account> accounts = accountMapper.selectList(null);
         return accounts;

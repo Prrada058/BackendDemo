@@ -13,7 +13,7 @@ public class JwtTokenProvider {
         return Jwts.builder()
                 .setSubject(username) // 设置主题（通常是用户名或用户ID）
                 .setIssuedAt(new Date()) // 设置签发时间
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 设置过期时间，1小时
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 2)) // 设置过期时间，2分钟
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY) // 使用 HS256 算法签名
                 .compact(); // 生成 Token
     }

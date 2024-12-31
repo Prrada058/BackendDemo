@@ -10,8 +10,8 @@ import java.util.List;
 @Mapper
 public interface TimetableMapper{
 
-    @Select("SELECT TO_CHAR(subway_time, 'HH24:MI') FROM timetable WHERE ROWNUM <= 5 AND TO_CHAR(subway_time, 'HH24:MI:SS') > TO_CHAR(SYSDATE, 'HH24:MI:SS') and SUBWAY_DIRECTION like '北安河'")
-    List<String> selectTimetable();
+    @Select("SELECT TO_CHAR(subway_time, 'HH24:MI') FROM timetable WHERE ROWNUM <= 5 and TO_CHAR(subway_time, 'HH24:MI:SS') > TO_CHAR(SYSDATE, 'HH24:MI:SS') and SUBWAY_STATION like #{station} ORDER BY SUBWAY_ID")
+    List<String> selectTimetable(String station);
 }
 
 
