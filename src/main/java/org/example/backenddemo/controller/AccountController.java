@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
@@ -54,8 +56,8 @@ public class AccountController {
 
         if (accToken != null && !accToken.isEmpty()) {
             if (JwtTokenProvider.validateToken(accToken)) {
-                    System.out.println("token登录成功");
-                    return ResponseEntity.ok("token登录成功");
+                System.out.println("token登录成功");
+                return ResponseEntity.ok("token登录成功");
             } else {
                 return ResponseEntity.status(401).body("错误 token");
             }
@@ -67,7 +69,7 @@ public class AccountController {
                 if (password.equals(accPassword)) {
                     String token = JwtTokenProvider.generateToken(accName);
                     System.out.println("登录成功返回 token");
-                    return ResponseEntity.ok (token);
+                    return ResponseEntity.ok(token);
                 } else {
                     return ResponseEntity.status(401).body("错误的密码");
                 }
@@ -100,4 +102,12 @@ public class AccountController {
         List<Account> accounts = accountMapper.selectList(null);
         return accounts;
     }
+
+//    @PostMapping("/accProfilePhoto")
+//    public String accProfilePhoto(String accountName, MultipartFile accProfilePhoto) throws IOException {
+//        System.out.println(accProfilePhoto.isEmpty());
+//        return FilesController.up(accProfilePhoto);
+//
+//    }
+
 }

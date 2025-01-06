@@ -9,6 +9,7 @@ public class Account {
     private String accName;
     private String accPassword;
     private String accEmail;
+    private String accProfilePhoto;
 
     @Override
     public String toString() {
@@ -17,6 +18,7 @@ public class Account {
                 ", accName='" + accName + '\'' +
                 ", accPassword='" + accPassword + '\'' +
                 ", accEmail='" + accEmail + '\'' +
+                ", accProfilePhoto='" + accProfilePhoto + '\'' +
                 '}';
     }
 
@@ -50,5 +52,13 @@ public class Account {
 
     public void setAccEmail(String accEmail) {
         this.accEmail = accEmail;
+    }
+
+    public String getAccProfilePhoto() {
+        return accProfilePhoto;
+    }
+
+    public void setAccProfilePhoto(String accProfilePhoto) {
+        this.accProfilePhoto = accProfilePhoto;
     }
 }
