@@ -5,6 +5,7 @@ import org.example.backenddemo.dto.LoginRequest;
 import org.example.backenddemo.entity.Account;
 import org.example.backenddemo.mapper.AccountMapper;
 import org.example.backenddemo.security.JwtTokenProvider;
+import org.example.backenddemo.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -103,11 +104,15 @@ public class AccountController {
         return accounts;
     }
 
-//    @PostMapping("/accProfilePhoto")
-//    public String accProfilePhoto(String accountName, MultipartFile accProfilePhoto) throws IOException {
-//        System.out.println(accProfilePhoto.isEmpty());
-//        return FilesController.up(accProfilePhoto);
-//
-//    }
+
+    @Autowired
+    private FileService fileService;
+
+    @PostMapping("/accProfilePhoto")
+    public String accProfilePhoto(String accountName, MultipartFile accProfilePhoto) throws IOException {
+        System.out.println(accProfilePhoto.isEmpty());
+        return fileService.uploadFile(accProfilePhoto, "accProfilePhoto");
+
+    }
 
 }
