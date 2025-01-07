@@ -108,11 +108,15 @@ public class AccountController {
     @Autowired
     private FileService fileService;
 
-    @PostMapping("/accProfilePhoto")
-    public String accProfilePhoto(String accountName, MultipartFile accProfilePhoto) throws IOException {
-        System.out.println(accProfilePhoto.isEmpty());
-        return fileService.uploadFile(accProfilePhoto, "accProfilePhoto");
-
+    @PostMapping("/setProfilePhoto")
+    public String setProfilePhoto(String accName, MultipartFile accProfilePhoto) throws IOException {
+        String fileName = fileService.uploadFile(accProfilePhoto, "accProfilePhoto");
+        accountMapper.updateProfilePhoto(accName, fileName);
+        return "success";
     }
 
+    @PostMapping("/getProfilePhoto")
+    public String getProfilePhoto(String accName) {
+        return accountMapper.getProfilePhotoByUsername(accName);
+    }
 }
