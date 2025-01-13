@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.backenddemo.mapper.BdOrgMapper">
+
+    <select id="getOrgWithCur" resultType="org.example.backenddemo.dto.BdOrg">
+        select o.pk_org as orgId,
+               o.name as orgName,
+               o.currency as currencyId,
+               c.NAME as currencyName
+        from bd_org o
+                 join BD_CURRENCY c on c.PK_CURRENCY = o.currency
+        WHERE o.PK_ORG = #{pk_org}
+    </select>
+
+</mapper>
