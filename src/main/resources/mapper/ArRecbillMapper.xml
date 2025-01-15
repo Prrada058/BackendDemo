@@ -5,7 +5,6 @@
 <mapper namespace="org.example.backenddemo.mapper.ArRecbillMapper">
 
     <select id="getFullRecbill" resultType="org.example.backenddemo.dto.ArRecbillFull">
-
         select recbill.pk_recbill  as recbillId,
                recbill.pk_org      as orgId,
                org.NAME            as orgName,

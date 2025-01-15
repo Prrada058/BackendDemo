@@ -8,8 +8,10 @@ import java.time.LocalDateTime;
 
 @TableName("ar_recbill")
 public class ArRecbill {
-    @TableId(type = IdType.AUTO)
+
+    @TableId(value = "pk_recbill", type = IdType.AUTO)
     private String pk_recbill;
+
     private String pk_org;
     private String pk_customer;
     private LocalDateTime create_date;

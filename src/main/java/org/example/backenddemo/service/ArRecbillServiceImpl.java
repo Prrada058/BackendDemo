@@ -34,7 +34,6 @@ public class ArRecbillServiceImpl implements ArRecbillService {
             return "?空 JSON";
         }
 
-        String pk_recbill;
         String pk_org;
         String pk_customer;
         LocalDateTime create_date;
@@ -47,12 +46,6 @@ public class ArRecbillServiceImpl implements ArRecbillService {
         String invoiceno;
         String billstatus;
 
-
-        if (isEmpty((String) arRecbill.get("pk_recbill"))) {
-            return "应收单号不能为空";
-        } else {
-            pk_recbill = (String) arRecbill.get("pk_recbill");
-        }
 
         if (isEmpty((String) arRecbill.get("pk_org"))) {
             return "组织不能为空";
@@ -156,7 +149,6 @@ public class ArRecbillServiceImpl implements ArRecbillService {
 
         ArRecbill new_arRecbill = new ArRecbill();
 
-        new_arRecbill.setPk_recbill(pk_recbill);
         new_arRecbill.setPk_org(pk_org);
         new_arRecbill.setPk_customer(pk_customer);
         new_arRecbill.setCreate_date(create_date);
@@ -170,7 +162,19 @@ public class ArRecbillServiceImpl implements ArRecbillService {
         new_arRecbill.setBillstatus(billstatus);
 
         System.out.println(new_arRecbill);
-        return "success";
+
+        return insertArRecbill(new_arRecbill);
+    }
+
+
+
+    public String insertArRecbill(ArRecbill arRecbill) {
+
+        arRecbillMapper.insert(arRecbill);
+
+        System.out.println(arRecbill.getPk_recbill());
+
+        return arRecbill.getPk_recbill();
     }
 
     public static boolean isEmpty(String str) {

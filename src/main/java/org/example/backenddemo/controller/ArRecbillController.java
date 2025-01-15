@@ -29,8 +29,11 @@ public class ArRecbillController {
 
     @PostMapping("/arRecbill")
     public String createArRecbill(@RequestBody Map<String, Object> arRecbill) {
-        arRecbill.forEach((key, value) -> System.out.println(key + ": " + value));
-        return arRecbillService.inputValidate(arRecbill);
+        String ValidateReturn = arRecbillService.inputValidate(arRecbill);
+        if (ValidateReturn.equals("success")) {
+
+        }
+        return ValidateReturn;
     }
 
 }
