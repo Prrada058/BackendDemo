@@ -168,7 +168,7 @@ public class ArRecbillServiceImpl implements ArRecbillService {
 
 
 
-    public String insertArRecbill(ArRecbill arRecbill) {
+    private String insertArRecbill(ArRecbill arRecbill) {
 
         arRecbillMapper.insert(arRecbill);
 

@@ -22,17 +22,14 @@ public class ArRecbillController {
     @Autowired
     private ArRecbillService arRecbillService;
 
-    @GetMapping("/arRecbillTest")
+    @GetMapping("/arRecbill/list")
     public List<ArRecbillFull> getAll() {
         return arRecbillMapper.getFullRecbill();
     }
 
-    @PostMapping("/arRecbill")
+    @PostMapping("/arRecbill/new")
     public String createArRecbill(@RequestBody Map<String, Object> arRecbill) {
         String ValidateReturn = arRecbillService.inputValidate(arRecbill);
-        if (ValidateReturn.equals("success")) {
-
-        }
         return ValidateReturn;
     }
 

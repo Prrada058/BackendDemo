@@ -7,24 +7,24 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @TableName("bd_org")
 public class BdOrg {
     @TableId(type = IdType.AUTO)
-    private int pk_org;
+    private String pk_org;
     private String name;
-    private String currency;
+    private String pk_currency;
 
     @Override
     public String toString() {
         return "BdOrg{" +
                 "pk_org=" + pk_org +
                 ", name='" + name + '\'' +
-                ", currency='" + currency + '\'' +
+                ", currency='" + pk_currency + '\'' +
                 '}';
     }
 
-    public int getPk_org() {
+    public String getPk_org() {
         return pk_org;
     }
 
-    public void setPk_org(int pk_org) {
+    public void setPk_org(String pk_org) {
         this.pk_org = pk_org;
     }
 
@@ -36,12 +36,12 @@ public class BdOrg {
         this.name = name;
     }
 
-    public String getCurrency() {
-        return currency;
+    public String getPk_currency() {
+        return pk_currency;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setPk_currency(String pk_currency) {
+        this.pk_currency = pk_currency;
     }
 }
 
