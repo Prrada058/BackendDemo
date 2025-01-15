@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.backenddemo.mapper.BdCurrencyMapper">
+
+    <select id="getCurrencyByPk" resultType="org.example.backenddemo.entity.BdCurrency">
+        select PK_CURRENCY as pk_currency,
+               name       as name
+        from BD_CURRENCY
+        where PK_CURRENCY = #{pk_currency}
+    </select>
+
+</mapper>

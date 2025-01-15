@@ -4,14 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.backenddemo.mapper.BdOrgMapper">
 
-    <select id="getOrgWithCur" resultType="org.example.backenddemo.dto.BdOrg">
-        select o.pk_org as orgId,
-               o.name as orgName,
+    <select id="getOrgWithCur" resultType="org.example.backenddemo.dto.BdOrgFull">
+        select o.pk_org   as orgId,
+               o.name     as orgName,
                o.currency as currencyId,
-               c.NAME as currencyName
+               c.NAME     as currencyName
         from bd_org o
                  join BD_CURRENCY c on c.PK_CURRENCY = o.currency
         WHERE o.PK_ORG = #{pk_org}
+    </select>
+
+    <select id="getOrgByPk" resultType="org.example.backenddemo.entity.BdOrg">
+        select pk_org   as pk_org,
+               name     as name,
+               CURRENCY as currency
+        from BD_ORG
+        where PK_ORG = #{pk_org}
     </select>
 
 </mapper>

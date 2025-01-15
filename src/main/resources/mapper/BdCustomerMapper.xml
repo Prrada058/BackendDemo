@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.backenddemo.mapper.BdCustomerMapper">
+
+    <select id="getCustomerByPk" resultType="org.example.backenddemo.entity.BdCustomer">
+        select pk_customer as pk_customer,
+               name        as name
+        from BD_CUSTOMER
+        where PK_CUSTOMER = #{pk_customer}
+    </select>
+
+
+</mapper>

@@ -1,6 +1,6 @@
 package org.example.backenddemo.dto;
 
-public class BdOrg {
+public class BdOrgFull {
     private String orgId;
     private String orgName;
     private String currencyId;

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.backenddemo.mapper.ArRecbillMapper">
+
+    <select id="getFullRecbill" resultType="org.example.backenddemo.dto.ArRecbillFull">
+
+        select recbill.pk_recbill  as recbillId,
+               recbill.pk_org      as orgId,
+               org.NAME            as orgName,
+               org.CURRENCY        as orgDefaultCurrency,
+               recbill.pk_customer as customerId,
+               customer.NAME       as customerName,
+               recbill.create_date as recbillCreateDate,
+               recbill.due_date    as recbillDueDate,
+               recbill.billmaker   as recbillCreaterId,
+               account.NAME        as recbillCreaterName,
+               recbill.pk_currency as recbillCurrencyId,
+               currency.NAME       as recbillCurrencyName,
+               recbill.rate        as recbillCurrencyRate,
+               recbill.money       as recbillMoney,
+               recbill.local_money as recbillLocalMoney,
+               recbill.invoiceno   as recbillInvoiceNo,
+               recbill.billstatus  as recbillStatus
+        from AR_RECBILL recbill
+                 join BD_ORG org on org.PK_ORG = recbill.PK_ORG
+                 join BD_CUSTOMER customer on customer.PK_CUSTOMER = recbill.pk_customer
+                 join BD_ACCOUNT account on account.PK_ACCOUNT = recbill.BILLMAKER
+                 join BD_CURRENCY currency on currency.PK_CURRENCY = recbill.pk_currency
+    </select>
+
+</mapper>
