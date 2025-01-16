@@ -44,7 +44,8 @@ public class ArRecbillServiceImpl implements ArRecbillService {
         double money;
         double local_money;
         String invoiceno;
-        String billstatus;
+        String bill_status;
+        String write_off_status;
 
 
         if (isEmpty((String) arRecbill.get("pk_org"))) {
@@ -105,9 +106,9 @@ public class ArRecbillServiceImpl implements ArRecbillService {
             }
         }
 
-        if (arRecbill.get("rate").getClass() == Double.class) {
+        if (arRecbill.get("rate").getClass() == Double.class && (Double)arRecbill.get("rate") != 0) {
             rate = (Double) arRecbill.get("rate");
-        } else if (arRecbill.get("rate").getClass() == Integer.class) {
+        } else if (arRecbill.get("rate").getClass() == Integer.class && (Integer) arRecbill.get("rate") != 0) {
             rate = (Integer) arRecbill.get("rate");
         } else {
             return "无效汇率";
@@ -135,14 +136,25 @@ public class ArRecbillServiceImpl implements ArRecbillService {
             invoiceno = (String) arRecbill.get("invoiceno");
         }
 
-        if (isEmpty((String) arRecbill.get("billstatus"))) {
+        if (isEmpty((String) arRecbill.get("bill_status"))) {
             return "状态不能为空";
         } else {
-            String TempBillstatus = (String) arRecbill.get("billstatus");
-            if (TempBillstatus.matches("[0-5]")) {
-                billstatus = TempBillstatus;
+            String TempBill_status = (String) arRecbill.get("bill_status");
+            if (TempBill_status.matches("[0-5]")) {
+                bill_status = TempBill_status;
             } else {
                 return "状态无效";
+            }
+        }
+
+        if (isEmpty((String) arRecbill.get("write_off_status"))) {
+            return "核销状态不能为空";
+        } else {
+            String TempWrite_off_status = (String) arRecbill.get("write_off_status");
+            if (TempWrite_off_status.matches("[0-5]")) {
+                write_off_status = TempWrite_off_status;
+            } else {
+                return "核销状态无效";
             }
         }
 
@@ -159,7 +171,8 @@ public class ArRecbillServiceImpl implements ArRecbillService {
         new_arRecbill.setMoney(money);
         new_arRecbill.setLocal_money(local_money);
         new_arRecbill.setInvoiceno(invoiceno);
-        new_arRecbill.setBillstatus(billstatus);
+        new_arRecbill.setBill_status(bill_status);
+        new_arRecbill.setWrite_off_status(write_off_status);
 
         System.out.println(new_arRecbill);
 

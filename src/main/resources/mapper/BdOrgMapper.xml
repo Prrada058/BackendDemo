@@ -5,19 +5,19 @@
 <mapper namespace="org.example.backenddemo.mapper.BdOrgMapper">
 
     <select id="getOrgWithCur" resultType="org.example.backenddemo.dto.BdOrgFull">
-        select o.pk_org   as orgId,
-               o.name     as orgName,
-               o.currency as currencyId,
-               c.NAME     as currencyName
+        select o.pk_org      as orgId,
+               o.name        as orgName,
+               o.pk_currency as currencyId,
+               c.NAME        as currencyName
         from bd_org o
-                 join BD_CURRENCY c on c.PK_CURRENCY = o.currency
+                 join BD_CURRENCY c on c.PK_CURRENCY = o.pk_currency
         WHERE o.PK_ORG = #{pk_org}
     </select>
 
     <select id="getOrgByPk" resultType="org.example.backenddemo.entity.BdOrg">
-        select pk_org   as pk_org,
-               name     as name,
-               CURRENCY as currency
+        select pk_org      as pk_org,
+               name        as name,
+               pk_currency as pk_currency
         from BD_ORG
         where PK_ORG = #{pk_org}
     </select>

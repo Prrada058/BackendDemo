@@ -21,9 +21,8 @@ public class ArGatherbill {
     private double rate;
     private double money;
     private double local_money;
-    private String billstatus;
-    private String settleflag;
-    private String pk_recbill;
+    private String bill_status;
+    private String write_off_status;
 
     @Override
     public String toString() {
@@ -37,9 +36,8 @@ public class ArGatherbill {
                 ", rate=" + rate +
                 ", money=" + money +
                 ", local_money=" + local_money +
-                ", billstatus='" + billstatus + '\'' +
-                ", settleflag='" + settleflag + '\'' +
-                ", pk_recbill='" + pk_recbill + '\'' +
+                ", bill_status='" + bill_status + '\'' +
+                ", write_off_status='" + write_off_status + '\'' +
                 '}';
     }
 
@@ -115,27 +113,19 @@ public class ArGatherbill {
         this.local_money = local_money;
     }
 
-    public String getBillstatus() {
-        return billstatus;
+    public String getBill_status() {
+        return bill_status;
     }
 
-    public void setBillstatus(String billstatus) {
-        this.billstatus = billstatus;
+    public void setBill_status(String bill_status) {
+        this.bill_status = bill_status;
     }
 
-    public String getSettleflag() {
-        return settleflag;
+    public String getWrite_off_status() {
+        return write_off_status;
     }
 
-    public void setSettleflag(String settleflag) {
-        this.settleflag = settleflag;
-    }
-
-    public String getPk_recbill() {
-        return pk_recbill;
-    }
-
-    public void setPk_recbill(String pk_recbill) {
-        this.pk_recbill = pk_recbill;
+    public void setWrite_off_status(String write_off_status) {
+        this.write_off_status = write_off_status;
     }
 }

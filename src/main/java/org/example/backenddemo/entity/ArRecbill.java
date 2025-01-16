@@ -22,8 +22,8 @@ public class ArRecbill {
     private double money;
     private double local_money;
     private String invoiceno;
-    private String billstatus;
-
+    private String bill_status;
+    private String write_off_status;
 
     @Override
     public String toString() {
@@ -39,7 +39,8 @@ public class ArRecbill {
                 ", money=" + money +
                 ", local_money=" + local_money +
                 ", invoiceno='" + invoiceno + '\'' +
-                ", billstatus=" + billstatus +
+                ", bill_status='" + bill_status + '\'' +
+                ", write_off_status='" + write_off_status + '\'' +
                 '}';
     }
 
@@ -131,11 +132,19 @@ public class ArRecbill {
         this.invoiceno = invoiceno;
     }
 
-    public String getBillstatus() {
-        return billstatus;
+    public String getBill_status() {
+        return bill_status;
     }
 
-    public void setBillstatus(String billstatus) {
-        this.billstatus = billstatus;
+    public void setBill_status(String bill_status) {
+        this.bill_status = bill_status;
+    }
+
+    public String getWrite_off_status() {
+        return write_off_status;
+    }
+
+    public void setWrite_off_status(String write_off_status) {
+        this.write_off_status = write_off_status;
     }
 }
