@@ -21,6 +21,7 @@ public class ArGatherbill {
     private double rate;
     private double money;
     private double local_money;
+    private double remain_money;
     private String bill_status;
     private String write_off_status;
 
@@ -36,6 +37,7 @@ public class ArGatherbill {
                 ", rate=" + rate +
                 ", money=" + money +
                 ", local_money=" + local_money +
+                ", remain_money=" + remain_money +
                 ", bill_status='" + bill_status + '\'' +
                 ", write_off_status='" + write_off_status + '\'' +
                 '}';
@@ -111,6 +113,14 @@ public class ArGatherbill {
 
     public void setLocal_money(double local_money) {
         this.local_money = local_money;
+    }
+
+    public double getRemain_money() {
+        return remain_money;
+    }
+
+    public void setRemain_money(double remain_money) {
+        this.remain_money = remain_money;
     }
 
     public String getBill_status() {

@@ -21,6 +21,7 @@ public class ArRecbill {
     private double rate;
     private double money;
     private double local_money;
+    private double remain_money;
     private String invoiceno;
     private String bill_status;
     private String write_off_status;
@@ -38,6 +39,7 @@ public class ArRecbill {
                 ", rate=" + rate +
                 ", money=" + money +
                 ", local_money=" + local_money +
+                ", remain_money=" + remain_money +
                 ", invoiceno='" + invoiceno + '\'' +
                 ", bill_status='" + bill_status + '\'' +
                 ", write_off_status='" + write_off_status + '\'' +
@@ -122,6 +124,14 @@ public class ArRecbill {
 
     public void setLocal_money(double local_money) {
         this.local_money = local_money;
+    }
+
+    public double getRemain_money() {
+        return remain_money;
+    }
+
+    public void setRemain_money(double remain_money) {
+        this.remain_money = remain_money;
     }
 
     public String getInvoiceno() {

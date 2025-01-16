@@ -43,6 +43,7 @@ public class ArRecbillServiceImpl implements ArRecbillService {
         double rate;
         double money;
         double local_money;
+        double remain_money;
         String invoiceno;
         String bill_status;
         String write_off_status;
@@ -130,6 +131,16 @@ public class ArRecbillServiceImpl implements ArRecbillService {
             return "无效组织本币金额";
         }
 
+        if (arRecbill.get("remain_money") == null) {
+            remain_money = local_money;
+        } else if (arRecbill.get("remain_money").getClass() == Double.class) {
+            remain_money = (Double) arRecbill.get("remain_money");
+        } else if (arRecbill.get("remain_money").getClass() == Integer.class) {
+            remain_money = (Integer) arRecbill.get("remain_money");
+        } else {
+            return "无效剩余金额";
+        }
+
         if (isEmpty((String) arRecbill.get("invoiceno"))) {
             return "发票号不能为空";
         } else {
@@ -170,6 +181,7 @@ public class ArRecbillServiceImpl implements ArRecbillService {
         new_arRecbill.setRate(rate);
         new_arRecbill.setMoney(money);
         new_arRecbill.setLocal_money(local_money);
+        new_arRecbill.setRemain_money(remain_money);
         new_arRecbill.setInvoiceno(invoiceno);
         new_arRecbill.setBill_status(bill_status);
         new_arRecbill.setWrite_off_status(write_off_status);

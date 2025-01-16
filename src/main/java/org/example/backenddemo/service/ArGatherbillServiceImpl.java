@@ -2,7 +2,6 @@ package org.example.backenddemo.service;
 
 
 import org.example.backenddemo.entity.ArGatherbill;
-import org.example.backenddemo.entity.ArRecbill;
 import org.example.backenddemo.mapper.ArGatherbillMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +15,6 @@ public class ArGatherbillServiceImpl implements ArGatherbillService {
 
     @Autowired
     private ArGatherbillMapper arGatherbillMapper;
-
-    @Autowired
-    private ArRecbillService arRecbillService;
 
     @Autowired
     private BdOrgService bdOrgService;
@@ -46,10 +42,9 @@ public class ArGatherbillServiceImpl implements ArGatherbillService {
         double rate;
         double money;
         double local_money;
+        double remain_money;
         String bill_status;
         String write_off_status;
-
-        ArRecbill arRecbill;
 
 
         if (isEmpty((String) arGatherbill.get("pk_org"))) {
@@ -119,12 +114,24 @@ public class ArGatherbillServiceImpl implements ArGatherbillService {
             return "无效金额";
         }
 
+
         if (arGatherbill.get("local_money").getClass() == Double.class) {
             local_money = (Double) arGatherbill.get("local_money");
         } else if (arGatherbill.get("local_money").getClass() == Integer.class) {
             local_money = (Integer) arGatherbill.get("local_money");
         } else {
             return "无效组织本币金额";
+        }
+
+
+        if (arGatherbill.get("remain_money") == null) {
+            remain_money = local_money;
+        } else if (arGatherbill.get("remain_money").getClass() == Double.class) {
+            remain_money = (Double) arGatherbill.get("remain_money");
+        } else if (arGatherbill.get("remain_money").getClass() == Integer.class) {
+            remain_money = (Integer) arGatherbill.get("remain_money");
+        } else {
+            return "无效剩余金额";
         }
 
         if (isEmpty((String) arGatherbill.get("bill_status"))) {
@@ -159,6 +166,7 @@ public class ArGatherbillServiceImpl implements ArGatherbillService {
         new_arGatherbill.setRate(rate);
         new_arGatherbill.setMoney(money);
         new_arGatherbill.setLocal_money(local_money);
+        new_arGatherbill.setRemain_money(remain_money);
         new_arGatherbill.setBill_status(bill_status);
         new_arGatherbill.setWrite_off_status(write_off_status);
 
