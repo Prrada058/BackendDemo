@@ -177,6 +177,12 @@ public class ArRecbillServiceImpl implements ArRecbillService {
         return arRecbill.getPk_recbill();
     }
 
+    public ArRecbill findById(String pk_recbill){
+        ArRecbill arRecbill = arRecbillMapper.selectById(pk_recbill);
+        return arRecbill;
+    }
+
+
     public static boolean isEmpty(String str) {
         return str == null || str.isEmpty();
     }

@@ -29,4 +29,8 @@
                  join BD_CURRENCY currency on currency.PK_CURRENCY = recbill.pk_currency
     </select>
 
+
+
+
+
 </mapper>
