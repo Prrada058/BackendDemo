@@ -22,5 +22,11 @@
         from AR_RECBILL
         where pk_recbill = #{pk_recbill}
     </select>
+    <update id="updateRecbillAsWriteoff">
+        update AR_RECBILL
+        set remain_money     = #{remain_money},
+            write_off_status = #{write_off_status}
+        where PK_RECBILL = #{pk_recbill}
+    </update>
 
 </mapper>

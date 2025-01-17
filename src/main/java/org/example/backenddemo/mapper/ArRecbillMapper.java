@@ -9,4 +9,7 @@ import org.example.backenddemo.entity.ArRecbill;
 public interface ArRecbillMapper extends BaseMapper<ArRecbill> {
     ArRecbill getRecbillByPk(@Param("pk_recbill") String pk_recbill);
 
+    int updateRecbillAsWriteoff(@Param("pk_recbill") String pk_recbill, @Param("remain_money") double remain_money, @Param("write_off_status") String write_off_status);
+
+
 }

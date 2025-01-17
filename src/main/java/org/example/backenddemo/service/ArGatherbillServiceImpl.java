@@ -190,6 +190,20 @@ public class ArGatherbillServiceImpl implements ArGatherbillService {
         return getGatherbillByPk(pk_gatherbill) != null;
     }
 
+    @Override
+    public void writeoff(String pk_gatherbill, double money) {
+        ArGatherbill arGatherbill = getGatherbillByPk(pk_gatherbill);
+
+        double epsilon = 1e-9; // 防止小数爆掉
+        if (arGatherbill.getRemain_money() - money >= epsilon) {
+            // 部分核销
+            arGatherbillMapper.updateGatherbillAsWriteoff(arGatherbill.getPk_gatherbill(), arGatherbill.getRemain_money() - money, "2");
+        } else if (arGatherbill.getRemain_money() - money < epsilon) {
+            // 完全核销
+            arGatherbillMapper.updateGatherbillAsWriteoff(arGatherbill.getPk_gatherbill(), 0, "1");
+        }
+    }
+
 
     public static boolean isEmpty(String str) {
         return str == null || str.isEmpty();

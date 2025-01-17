@@ -212,6 +212,20 @@ public class ArRecbillServiceImpl implements ArRecbillService {
         return getRecbillByPk(pk_recbill) != null;
     }
 
+    @Override
+    public void writeoff(String pk_recbill, double money) {
+        ArRecbill arRecbill = getRecbillByPk(pk_recbill);
+
+        double epsilon = 1e-9; // 防止小数爆掉
+        if (arRecbill.getRemain_money() - money >= epsilon) {
+            // 部分核销
+            arRecbillMapper.updateRecbillAsWriteoff(arRecbill.getPk_recbill(), arRecbill.getRemain_money() - money, "2");
+        } else if (arRecbill.getRemain_money() - money < epsilon) {
+            // 完全核销
+            arRecbillMapper.updateRecbillAsWriteoff(arRecbill.getPk_recbill(), 0, "1");
+        }
+    }
+
 
     public static boolean isEmpty(String str) {
         return str == null || str.isEmpty();

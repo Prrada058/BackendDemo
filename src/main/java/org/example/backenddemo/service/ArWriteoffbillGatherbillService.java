@@ -7,4 +7,6 @@ import java.util.Map;
 public interface ArWriteoffbillGatherbillService {
 
     ArWriteoffbillGatherbill inputValidate(Map<String, Object> arWriteoffbillGatherbill);
+
+    String insertArWriteoffbillGatherbill(ArWriteoffbillGatherbill arWriteoffbillGatherbill);
 }

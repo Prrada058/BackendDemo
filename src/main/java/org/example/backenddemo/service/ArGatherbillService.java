@@ -13,4 +13,5 @@ public interface ArGatherbillService {
     boolean isGatherbillExist(String pk_gatherbill);
 
 
+    void writeoff(String pk_gatherbill, double money);
 }

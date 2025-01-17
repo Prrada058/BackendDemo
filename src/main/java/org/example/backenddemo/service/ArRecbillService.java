@@ -11,4 +11,6 @@ public interface ArRecbillService {
     ArRecbill getRecbillByPk(String pk_recbill);
 
     boolean isRecbillExist(String pk_recbill);
+
+    void writeoff(String pk_recbill, double money);
 }

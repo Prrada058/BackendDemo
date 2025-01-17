@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 
 @Service
@@ -34,6 +35,12 @@ public class ArWriteoffbillServiceImpl implements ArWriteoffbillService {
 
     @Autowired
     private ArWriteoffbillRecbillService arWriteoffbillRecbillService;
+
+    @Autowired
+    private ArGatherbillService arGatherbillService;
+
+    @Autowired
+    private ArRecbillService arRecbillService;
 
 
     @Override
@@ -103,7 +110,7 @@ public class ArWriteoffbillServiceImpl implements ArWriteoffbillService {
 
         List<ArWriteoffbillGatherbill> gatherbillList = new ArrayList<>();
 
-        if (arWriteoffbill.get("gatherbill") == null) {
+        if (arWriteoffbill.get("gatherbill") == null || Objects.equals(arWriteoffbill.get("gatherbill").toString(), "[]")) {
             return "空收款单";
         } else {
             for (Object item : (List) arWriteoffbill.get("gatherbill")) {
@@ -127,7 +134,7 @@ public class ArWriteoffbillServiceImpl implements ArWriteoffbillService {
 
         List<ArWriteoffbillRecbill> recbillList = new ArrayList<>();
 
-        if (arWriteoffbill.get("recbill") == null) {
+        if (arWriteoffbill.get("recbill") == null || Objects.equals(arWriteoffbill.get("recbill").toString(), "[]")) {
             return "空应收单";
         } else {
             for (Object item : (List) arWriteoffbill.get("recbill")) {
@@ -148,22 +155,58 @@ public class ArWriteoffbillServiceImpl implements ArWriteoffbillService {
             }
         }
 
-        //todo 两 list 验证金额并保存
 
+        double gatherbillTotal = 0;
+        for (ArWriteoffbillGatherbill item : gatherbillList) {
+            gatherbillTotal += item.getMoney();
+        }
+
+        double recbillTotal = 0;
+        for (ArWriteoffbillRecbill item : recbillList) {
+            recbillTotal += item.getMoney();
+        }
+
+        double epsilon = 1e-9; // 防止小数爆掉
+
+        if (Math.abs(gatherbillTotal - recbillTotal) > epsilon) {
+            return "应收单和收款单费用不一致，无法核销";
+        }
 
         ArWriteoffbill new_arWriteoffbill = new ArWriteoffbill();
+
         new_arWriteoffbill.setPk_org(pk_org);
         new_arWriteoffbill.setPk_customer(pk_customer);
         new_arWriteoffbill.setBillmaker(billmaker);
         new_arWriteoffbill.setCreate_date(create_date);
         new_arWriteoffbill.setBill_status(bill_status);
 
+        String pk_ar_writeoffbill = insertArWriteoffbill(new_arWriteoffbill);
 
-//        return new_arWriteoffbill.getPk_ar_writeoffbill();
-        return "success";
+        for (ArWriteoffbillGatherbill item : gatherbillList) {
+            item.setPk_ar_writeoffbill(pk_ar_writeoffbill);
+            arGatherbillService.writeoff(item.getPk_gatherbill(), item.getMoney());
+            arWriteoffbillGatherbillService.insertArWriteoffbillGatherbill(item);
+
+
+        }
+
+        for (ArWriteoffbillRecbill item : recbillList) {
+            item.setPk_ar_writeoffbill(pk_ar_writeoffbill);
+            arRecbillService.writeoff(item.getPk_recbill(), item.getMoney());
+            arWriteoffbillRecbillService.insertArWriteoffbillRecbill(item);
+        }
+
+
+        return pk_ar_writeoffbill;
     }
 
-    public static boolean isEmpty(String str) {
+    private String insertArWriteoffbill(ArWriteoffbill arWriteoffbill) {
+        arWriteoffbillMapper.insert(arWriteoffbill);
+        System.out.println(arWriteoffbill.getPk_ar_writeoffbill());
+        return arWriteoffbill.getPk_ar_writeoffbill();
+    }
+
+    private static boolean isEmpty(String str) {
         return str == null || str.isEmpty();
     }
 

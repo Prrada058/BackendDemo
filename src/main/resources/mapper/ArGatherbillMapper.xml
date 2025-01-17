@@ -20,5 +20,10 @@
         from AR_GATHERBILL
         where pk_gatherbill = #{pk_gatherbill}
     </select>
-
+    <update id="updateGatherbillAsWriteoff">
+        update AR_GATHERBILL
+        set remain_money     = #{remain_money},
+            write_off_status = #{write_off_status}
+        where PK_GATHERBILL = #{pk_gatherbill}
+    </update>
 </mapper>

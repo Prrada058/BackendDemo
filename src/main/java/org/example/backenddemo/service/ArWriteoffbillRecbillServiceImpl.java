@@ -1,6 +1,7 @@
 package org.example.backenddemo.service;
 
 import org.example.backenddemo.entity.ArWriteoffbillRecbill;
+import org.example.backenddemo.mapper.ArWriteoffbillRecbillMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,9 @@ public class ArWriteoffbillRecbillServiceImpl implements ArWriteoffbillRecbillSe
 
     @Autowired
     private ArRecbillService arRecbillService;
+
+    @Autowired
+    private ArWriteoffbillRecbillMapper arWriteoffbillRecbillMapper;
 
 
     @Override
@@ -48,6 +52,12 @@ public class ArWriteoffbillRecbillServiceImpl implements ArWriteoffbillRecbillSe
 
 
         return new_arWriteoffbillRecbill;
+    }
+
+    @Override
+    public String insertArWriteoffbillRecbill(ArWriteoffbillRecbill arWriteoffbillRecbill){
+        arWriteoffbillRecbillMapper.insert(arWriteoffbillRecbill);
+        return arWriteoffbillRecbill.getPk_ar_writeoffbill_recbill();
     }
 
     public static boolean isEmpty(String str) {

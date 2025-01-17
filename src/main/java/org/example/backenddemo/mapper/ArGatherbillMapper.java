@@ -10,6 +10,8 @@ import org.example.backenddemo.entity.BdAccount;
 public interface ArGatherbillMapper extends BaseMapper<ArGatherbill> {
     ArGatherbill getGatherbillByPk(@Param("pk_gatherbill") String pk_gatherbill);
 
+    int updateGatherbillAsWriteoff(@Param("pk_gatherbill") String pk_gatherbill, @Param("remain_money") double remain_money, @Param("write_off_status") String write_off_status);
+
 
 
 }
