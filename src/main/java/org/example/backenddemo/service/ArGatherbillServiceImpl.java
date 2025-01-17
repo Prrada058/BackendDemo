@@ -1,6 +1,5 @@
 package org.example.backenddemo.service;
 
-
 import org.example.backenddemo.entity.ArGatherbill;
 import org.example.backenddemo.mapper.ArGatherbillMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -180,6 +179,17 @@ public class ArGatherbillServiceImpl implements ArGatherbillService {
         System.out.println(arGatherbill.getPk_gatherbill());
         return arGatherbill.getPk_gatherbill();
     }
+
+    @Override
+    public ArGatherbill getGatherbillByPk(String pk_gatherbill) {
+        return arGatherbillMapper.getGatherbillByPk(pk_gatherbill);
+    }
+
+    @Override
+    public boolean isGatherbillExist(String pk_gatherbill) {
+        return getGatherbillByPk(pk_gatherbill) != null;
+    }
+
 
     public static boolean isEmpty(String str) {
         return str == null || str.isEmpty();

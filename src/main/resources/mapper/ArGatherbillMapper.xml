@@ -2,25 +2,23 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.example.backenddemo.mapper.ArRecbillMapper">
+<mapper namespace="org.example.backenddemo.mapper.ArGatherbillMapper">
 
-    <select id="getRecbillByPk" resultType="org.example.backenddemo.entity.ArRecbill">
-        select pk_recbill,
+    <select id="getGatherbillByPk" resultType="org.example.backenddemo.entity.ArGatherbill">
+        select pk_gatherbill,
                pk_org,
                pk_customer,
                create_date,
-               due_date,
                billmaker,
                pk_currency,
                rate,
                money,
                local_money,
                remain_money,
-               invoiceno,
                bill_status,
                write_off_status
-        from AR_RECBILL
-        where pk_recbill = #{pk_recbill}
+        from AR_GATHERBILL
+        where pk_gatherbill = #{pk_gatherbill}
     </select>
 
 </mapper>

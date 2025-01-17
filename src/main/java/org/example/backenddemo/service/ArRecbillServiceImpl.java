@@ -30,6 +30,7 @@ public class ArRecbillServiceImpl implements ArRecbillService {
 
     @Override
     public String inputValidate(Map<String, Object> arRecbill) {
+
         if (arRecbill == null) {
             return "?空 JSON";
         }
@@ -192,7 +193,6 @@ public class ArRecbillServiceImpl implements ArRecbillService {
     }
 
 
-
     private String insertArRecbill(ArRecbill arRecbill) {
 
         arRecbillMapper.insert(arRecbill);
@@ -202,9 +202,14 @@ public class ArRecbillServiceImpl implements ArRecbillService {
         return arRecbill.getPk_recbill();
     }
 
-    public ArRecbill findById(String pk_recbill){
-        ArRecbill arRecbill = arRecbillMapper.selectById(pk_recbill);
-        return arRecbill;
+    @Override
+    public ArRecbill getRecbillByPk(String pk_recbill){
+        return arRecbillMapper.getRecbillByPk(pk_recbill);
+    }
+
+    @Override
+    public boolean isRecbillExist(String pk_recbill) {
+        return getRecbillByPk(pk_recbill) != null;
     }
 
 

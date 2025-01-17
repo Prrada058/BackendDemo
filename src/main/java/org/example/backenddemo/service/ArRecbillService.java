@@ -8,5 +8,7 @@ public interface ArRecbillService {
 
     String inputValidate(Map<String, Object> arRecbill);
 
-    ArRecbill findById(String pk_recbill);
+    ArRecbill getRecbillByPk(String pk_recbill);
+
+    boolean isRecbillExist(String pk_recbill);
 }
