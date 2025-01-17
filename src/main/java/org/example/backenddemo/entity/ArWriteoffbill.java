@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class ArWriteoffbill {
     @TableId(value = "pk_ar_writeoffbill", type = IdType.AUTO)
     private String pk_ar_writeoffbill;
+
     private String pk_org;
     private String pk_customer;
     private LocalDateTime create_date;

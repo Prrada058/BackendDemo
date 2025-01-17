@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.backenddemo.mapper.ArWriteoffbillMapper">
+
+    <select id="getWriteoffbillByPk" resultType="org.example.backenddemo.entity.ArWriteoffbill">
+        select pk_ar_writeoffbill as pk_ar_writeoffbill,
+               pk_org             as pk_org,
+               pk_customer        as pk_customer,
+               create_date        as create_date,
+               billmaker          as billmaker,
+               bill_status        as bill_status
+        from AR_WRITEOFFBILL
+        where PK_AR_WRITEOFFBILL = #{pk_ar_writeoffbill}
+    </select>
+
+</mapper>

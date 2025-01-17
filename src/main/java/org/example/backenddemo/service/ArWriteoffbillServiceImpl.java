@@ -206,6 +206,13 @@ public class ArWriteoffbillServiceImpl implements ArWriteoffbillService {
         return arWriteoffbill.getPk_ar_writeoffbill();
     }
 
+    @Override
+    public ArWriteoffbill getArWriteoffbillByPk(String pk_ar_writeoffbill) {
+        ArWriteoffbill arWriteoffbill = arWriteoffbillMapper.getWriteoffbillByPk(pk_ar_writeoffbill);
+        return arWriteoffbill;
+    }
+
+
     private static boolean isEmpty(String str) {
         return str == null || str.isEmpty();
     }
