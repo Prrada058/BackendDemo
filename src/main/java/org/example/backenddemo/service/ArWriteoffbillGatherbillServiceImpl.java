@@ -5,6 +5,7 @@ import org.example.backenddemo.mapper.ArWriteoffbillGatherbillMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -60,6 +61,8 @@ public class ArWriteoffbillGatherbillServiceImpl implements ArWriteoffbillGather
         arWriteoffbillGatherbillMapper.insert(arWriteoffbillGatherbill);
         return arWriteoffbillGatherbill.getPk_ar_writeoffbill_gatherbill();
     }
+
+    public List<ArWriteoffbillGatherbill> selectArWriteoffbillGatherbillBy;
 
     public static boolean isEmpty(String str) {
         return str == null || str.isEmpty();

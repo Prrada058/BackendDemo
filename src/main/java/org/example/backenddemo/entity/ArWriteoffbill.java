@@ -1,10 +1,12 @@
 package org.example.backenddemo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @TableName("ar_writeoffbill")
 public class ArWriteoffbill {
@@ -17,6 +19,11 @@ public class ArWriteoffbill {
     private String billmaker;
     private String bill_status;
 
+    @TableField(exist = false)
+    private List<ArWriteoffbillGatherbill> gatherbills;
+    @TableField(exist = false)
+    private List<ArWriteoffbillRecbill> recbills;
+
     @Override
     public String toString() {
         return "ArWriteoffbill{" +
@@ -26,6 +33,8 @@ public class ArWriteoffbill {
                 ", create_date=" + create_date +
                 ", billmaker='" + billmaker + '\'' +
                 ", bill_status='" + bill_status + '\'' +
+                ", gatherbills=" + gatherbills +
+                ", recbills=" + recbills +
                 '}';
     }
 
@@ -75,5 +84,21 @@ public class ArWriteoffbill {
 
     public void setBill_status(String bill_status) {
         this.bill_status = bill_status;
+    }
+
+    public List<ArWriteoffbillGatherbill> getGatherbills() {
+        return gatherbills;
+    }
+
+    public void setGatherbills(List<ArWriteoffbillGatherbill> gatherbills) {
+        this.gatherbills = gatherbills;
+    }
+
+    public List<ArWriteoffbillRecbill> getRecbills() {
+        return recbills;
+    }
+
+    public void setRecbills(List<ArWriteoffbillRecbill> recbills) {
+        this.recbills = recbills;
     }
 }
